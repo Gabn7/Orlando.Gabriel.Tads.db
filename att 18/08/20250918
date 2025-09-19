@@ -1,0 +1,28 @@
+estudo de casa
+
+CRIAR TABELA CLIENTES ( id NÚMERO GERADO POR PADRÃO EM NULL COMO IDENTIDADE CHAVE PRIMÁRIA, nome VARCHAR2(100) NÃO NULO, email VARCHAR2(120) ÚNICO );
+
+INSERT INTO clientes(nome, email) VALORES ('Pedro da silva', ' Pedrosilva@gmail.com ');
+
+INSERT INTO clientes(nome, email) VALORES ('Gabriel', ' Gabriel@gmail.com ');
+
+INSERIR EM clientes(nome, email) VALORES ('Gustavo', ' guh@gmail.com ');
+
+CREATE TABLE PRODUTOS ( id NUMBER GENERATED POR PADRÃO EM NULL AS IDENTITY PRIMARY KEY, nome VARCHAR2(100) NOT NULL, preco NUMBER(10,2) NOT NULL CHECK (preco >= 0), tipo VARCHAR2(50) NOT NULL );
+
+-- Inserindo alguns produtos INSERT INTO PRODUTOS (nome, preço, tipo) VALUES ('Notebook X', 3000, 'Notebook'),
+('Notebook Y', 3500, 'Notebook'), ('Celular Z', 2000, 'Celular');
+
+ATUALIZAR PRODUTOS SET preco = (preco + (preco / 100) * 10) ONDE nome = 'Notebook X';
+
+ATUALIZAR PRODUTOS SET preco = (preco + (preco / 100) * 10) ONDE nome = 'Notebook Y';
+
+SELECIONE * DOS PRODUTOS;
+
+CREATE TABLE PEDIDOS ( id NÚMERO GERADO POR PADRÃO EM NULL AS IDENTITY PRIMARY KEY, cliente_id NÚMERO NÃO NULO, produto_id NÚMERO NÃO NULO, status VARCHAR2(20) NÃO NULO CHECK (status IN ('ABERTO','FINALIZADO','CANCELADO')) );
+
+INSERIR EM PEDIDOS (cliente_id, produto_id, status) VALORES (1, 1, 'ABERTO'), (2, 2, 'CANCELADO'), (3, 3, 'FINALIZADO'), (1, 2, 'CANCELADO');
+
+DELETE FROM pedidos WHERE status = 'CANCELADO';
+
+MERGE INTO produtos p USING ( SELECT id, preco FROM produtos WHERE preco = 2000 ) prod ON (p.id = prod.id) WHEN MATCHED THEN UPDATE SET p.preco = prod.preco * 1.2;
