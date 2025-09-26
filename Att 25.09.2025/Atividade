@@ -1,0 +1,24 @@
+--Exerciocio A--
+    SELECT PRODUTO, VENDEDOR,DATA_VENDA
+    FROM VENDAS
+    WHERE VENDEDOR = 'ana'
+    ORDER BY DATA_VENDA;
+
+--Exercicio B--
+    SELECT 
+    SUM (valor) AS VALOR_TOTAL
+     FROM VENDAS
+     WHERE CATEGORIA = 'Eletrônicos';
+
+--Exercicio C--
+     SELECT valor
+FROM VENDAS
+WHERE valor BETWEEN 200 AND 1000;
+
+--Exercicio D--
+SELECT 
+vendedor,
+SUM (VALOR) AS VALOR_TOTAL,
+COUNT(*) AS QUANTIDADE_VENDAS
+FROM VENDAS
+GROUP BY vendedor;
