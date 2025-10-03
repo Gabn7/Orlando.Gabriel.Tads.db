@@ -1,0 +1,26 @@
+--Exercício A--
+SELECT produto, VALOR FROM VENDAS
+WHERE VALOR > (
+    SELECT MIN (VALOR)
+    FROM VENDAS
+    WHERE CATEGORIA = 'Eletrônicos'
+);
+
+--Exercício B--
+SELECT produto, valor, vendedor FROM VENDAS
+WHERE valor = (
+    SELECT MAX (valor) FROM VENDAS 
+);
+
+--Exercício C
+SELECT DISTINCT categoria
+FROM VENDAS 
+WHERE valor > (SELECT AVG(valor) FROM VENDAS);
+
+--Exercício D--
+SELECT * FROM (
+    SELECT VENDEDOR, PRODUTO, VALOR, ROW_NUMBER() OVER (PARTITION BY VENDEDOR ORDER BY VALOR DESC) AS ranking
+    FROM VENDAS
+) 
+WHERE ranking <= 3
+ORDER BY VENDEDOR, VALOR DESC;
